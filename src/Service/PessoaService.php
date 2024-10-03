@@ -63,6 +63,11 @@ class PessoaService
         return $this->pessoaRepository->listAll();
     }
 
+    public function listByName(string $nome): array
+    {
+        return $this->pessoaRepository->listByName($nome);
+    }
+
     public function cpfExists($cpf): bool
     {
         return $this->pessoaRepository->findByCpf($cpf) !== null;

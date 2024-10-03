@@ -77,9 +77,16 @@ class PessoaController
         return new Response(null, Response::HTTP_NO_CONTENT);
     }
 
-    public function list(): Response
+    public function list(?string $nome = null): Response
     {
-        $pessoas = $this->pessoaService->list();
-        return new JsonResponse($pessoas, Response::HTTP_OK);
+        if ($nome) {
+            $pessoas = $this->pessoaService->listByName($nome);
+
+            return new JsonResponse($pessoas, Response::HTTP_OK);
+        } else {
+            $pessoas = $this->pessoaService->list();
+                
+            return new JsonResponse($pessoas, Response::HTTP_OK);
+        }
     }
 }

@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("pessoa-form").addEventListener("submit", function(event) {
         event.preventDefault();
-        const id = document.getElementById("pessoa-id").value;
         const nome = document.getElementById("nome").value;
         const cpf = document.getElementById("cpf").value;
 
@@ -13,7 +12,72 @@ document.addEventListener("DOMContentLoaded", function() {
 
         createPessoa(formData);
     });
+
+    document.getElementById("cpf").addEventListener("input", function() {
+        const cpf = this.value;
+        const errorElement = document.getElementById("error-message");
+        errorElement.style.display = "none";
+        
+        const saveButton = document.getElementById("save-button");
+
+        if (!validarCPF(cpf)) {
+            saveButton.disabled = true;
+            errorElement.innerText = "CPF inválido";
+            errorElement.style.display = "block";
+            
+            return;
+        }
+
+        saveButton.disabled = false;
+    });
+
+    document.getElementById("search-input").addEventListener("input", function() {
+        const searchTerm = this.value.toLowerCase();
+        loadPessoas(searchTerm)
+    });
 });
+
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, '');
+
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    let soma = 0;
+    let resto;
+
+    for (let i = 1; i <= 9; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        return false;
+    }
+
+    soma = 0;
+
+    for (let i = 1; i <= 10; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        return false;
+    }
+
+    return true;
+}
 
 function createPessoa(data) {
     fetch('http://localhost:8081/create/pessoa', {
@@ -44,8 +108,8 @@ function createPessoa(data) {
     });
 }
 
-function loadPessoas() {
-    fetch('http://localhost:8081/list/pessoa', {
+function loadPessoas(nome) {
+    fetch(nome ? `http://localhost:8081/list/pessoa?nome=${nome}` : 'http://localhost:8081/list/pessoa', {
         method: 'GET',
     })
     .then(response => {
@@ -97,7 +161,6 @@ function createEditButton(id) {
     };
     return button;
 }
-
 
 function createDeleteButton(id) {
     const button = document.createElement("button");

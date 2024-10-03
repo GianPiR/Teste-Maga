@@ -45,7 +45,21 @@ class PessoaRepository extends EntityRepository
 
     public function listByName(string $nome): array
     {
-        return $this->_em->getRepository(Pessoa::class)->findBy(['nome' => $nome]);
+        $pessoas = $this->_em->createQueryBuilder()
+            ->select('p')
+            ->from(Pessoa::class, 'p')
+            ->where('LOWER(p.nome) LIKE LOWER(:nome)')
+            ->setParameter('nome', '%' . $nome . '%')
+            ->getQuery()
+            ->getResult();
+
+        return array_map(function ($pessoa) {
+            return [
+                'id' => $pessoa->getId(),
+                'nome' => $pessoa->getNome(),
+                'cpf' => $pessoa->getCpf(),
+            ];
+        }, $pessoas);
     }
 
     public function findByCpf($cpf)

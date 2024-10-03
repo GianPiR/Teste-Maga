@@ -14,11 +14,92 @@ document.addEventListener("DOMContentLoaded", function() {
 
         updatePessoa(id, nome, cpf);
     });
+    
+    document.getElementById("cpf").addEventListener("input", function() {
+        const cpf = this.value;
+        const errorElement = document.getElementById("error-message");
+        errorElement.style.display = "none";
+        
+        const saveButton = document.getElementById("save-button");
+
+        if (!validarCPF(cpf)) {
+            saveButton.disabled = true;
+            errorElement.innerText = "CPF inválido";
+            errorElement.style.display = "block";
+            
+            return;
+        }
+
+        saveButton.disabled = false;
+    });
+
+    
+    document.getElementById("tipo").addEventListener("input", function() {
+        const tipo = this.value;
+        const tipoFixed = tipo.replace(/[^a-zA-Z0-9 ]/g, '');
+
+        const errorElement = document.getElementById("error-tipo");
+        errorElement.style.display = "none";
+        
+        const saveButton = document.getElementById("save-button-contato");
+
+        if (tipoFixed !== 'telefone' && tipoFixed !== 'email') {
+            errorElement.innerText = "O tipo deve ser 'telefone' ou 'email'";
+            errorElement.style.display = "block";
+            saveButton.disabled = true;
+            
+            return;
+        }
+
+        saveButton.disabled = false;
+    });
 
     document.getElementById("back-button").addEventListener("click", function() {
         window.location.href = "index.html";
     });
 });
+
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, '');
+
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    let soma = 0;
+    let resto;
+
+    for (let i = 1; i <= 9; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    resto = (soma * 10) % 11;
+
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+
+    if (resto !== parseInt(cpf.substring(9, 10))) {
+        return false;
+    }
+
+    soma = 0;
+
+    for (let i = 1; i <= 10; i++) {
+        soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) {
+        resto = 0;
+    }
+    
+    if (resto !== parseInt(cpf.substring(10, 11))) {
+        return false;
+    }
+
+    return true;
+}
 
 function loadPessoa(id) {
     fetch(`http://localhost:8081/get/pessoa/${id}`, {
@@ -73,7 +154,7 @@ document.getElementById("contato-form").addEventListener("submit", function(even
     const tipo = document.getElementById("tipo").value;
     const descricao = document.getElementById("descricao").value;
 
-    createContato(pessoaId, tipo, descricao);
+    createContato(pessoaId, tipo.replace(/[^a-zA-Z0-9 ]/g, ''), descricao);
 });
 
 

@@ -14,11 +14,12 @@
             <input type="hidden" id="pessoa-id">
             <input type="text" id="nome" placeholder="Nome" required>
             <input type="text" id="cpf" placeholder="CPF" required>
-            <button type="submit">Adicionar</button>
+            <button type="submit" id="save-button">Adicionar</button>
             <div id="error-message" style="display:none; color: red;"></div>
         </form>
 
         <h2>Lista de Pessoas</h2>
+        <input type="text" id="search-input" placeholder="Buscar por nome">
         <ul id="pessoa-list"></ul>
     </div>
 

@@ -1,5 +1,6 @@
 <?php
 use App\Controller\PessoaController;
+use App\Controller\ContatoController;
 
 $router->add('POST', '/create/pessoa', [PessoaController::class, 'create']);
 $router->add('GET', '/list/pessoa', [PessoaController::class, 'list']);

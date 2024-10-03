@@ -12,7 +12,27 @@ document.addEventListener("DOMContentLoaded", function() {
         const tipo = document.getElementById("tipo").value;
         const descricao = document.getElementById("descricao").value;
 
-        updateContato(id, tipo, descricao);
+        updateContato(id, tipo.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase(), descricao);
+    });
+
+    document.getElementById("tipo").addEventListener("input", function() {
+        const tipo = this.value;
+        const tipoFixed = tipo.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase();
+
+        const errorElement = document.getElementById("error-tipo");
+        errorElement.style.display = "none";
+        
+        const saveButton = document.getElementById("save-button");
+
+        if (tipoFixed !== 'telefone' && tipoFixed !== 'email') {
+            errorElement.innerText = "O tipo deve ser 'telefone' ou 'email'";
+            errorElement.style.display = "block";
+            saveButton.disabled = true;
+            
+            return;
+        }
+
+        saveButton.disabled = false;
     });
 
     document.getElementById("back-button").addEventListener("click", function() {

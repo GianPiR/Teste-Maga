@@ -19,7 +19,7 @@
                 <label for="cpf">CPF:</label>
                 <input type="text" id="cpf" placeholder="CPF" required>
             </div>
-            <button type="submit">Salvar</button>
+            <button type="submit" id="save-button">Salvar</button>
             <div id="error-message" style="display:none; color: red;"></div>
         </form>
 
@@ -27,8 +27,9 @@
         <form id="contato-form">
             <input type="hidden" id="pessoa-id-contato" value="">
             <input type="text" id="tipo" placeholder="Tipo" required>
+            <div id="error-tipo" style="display:none; color: red;"></div>
             <input type="text" id="descricao" placeholder="Descrição" required>
-            <button type="submit">Adicionar Contato</button>
+            <button type="submit" id="save-button-contato">Adicionar Contato</button>
         </form>
 
         <h3>Lista de Contatos</h3>

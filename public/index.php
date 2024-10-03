@@ -31,8 +31,14 @@ $contatoController = new ContatoController($contatoService, $pessoaService);
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if ($path === '/list/pessoa') {
-    $response = $pessoaController->list();
-    echo $response->getContent();
+    if (!empty($_GET)) {
+        $nome = $_GET['nome'];
+        $response = $pessoaController->list($nome);
+        echo $response->getContent();
+    } else {
+        $response = $pessoaController->list();
+        echo $response->getContent();
+    }
 } elseif ($path === '/create/pessoa') {
     $response = $pessoaController->create($_POST['nome'], $_POST['cpf']);
     echo $response->getContent();
