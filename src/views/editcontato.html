@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Contato</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body></body>
+    <div class="container">
+        <h1>Editar Contato</h1>
+        <form id="edit-contato-form">
+            <input type="hidden" id="contato-id">
+            <div class="input-group">
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" placeholder="Tipo" required>
+            </div>
+            <div class="input-group">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" placeholder="Descrição" required>
+            </div>
+            <button type="submit">Salvar</button>
+            <div id="error-message" style="display:none; color: red;"></div>
+        </form>
+
+        <button id="back-button">Voltar</button>
+    </div>
+
+    <script src="../../public/js/editcontato.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+    "name": "gian/teste-magazord",
+    "description": "Teste para vaga de Backend",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Gian Pierre",
+            "email": "gianpierresb@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "2.10.2",
+        "doctrine/cache": "1.12.1",
+        "doctrine/annotations": "^1.14",
+        "symfony/http-foundation": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

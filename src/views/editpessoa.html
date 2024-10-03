@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pessoa</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="titulo-editar">Editar Pessoa</h1>
+        <form id="edit-pessoa-form">
+            <input type="hidden" id="pessoa-id">
+            <div class="input-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" placeholder="Nome" required>
+            </div>
+            <div class="input-group">
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" placeholder="CPF" required>
+            </div>
+            <button type="submit">Salvar</button>
+            <div id="error-message" style="display:none; color: red;"></div>
+        </form>
+
+        <h2>Adicionar Contato</h2>
+        <form id="contato-form">
+            <input type="hidden" id="pessoa-id-contato" value="">
+            <input type="text" id="tipo" placeholder="Tipo" required>
+            <input type="text" id="descricao" placeholder="Descrição" required>
+            <button type="submit">Adicionar Contato</button>
+        </form>
+
+        <h3>Lista de Contatos</h3>
+        <ul id="contato-list"></ul>
+
+        <button id="back-button">Voltar</button>
+    </div>
+
+    <script src="../../public/js/editpessoa.js"></script>
+</body>
+</html>

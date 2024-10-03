@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: local
+    environment:
+      POSTGRES_DB: teste_magazord
+      POSTGRES_USER: teste_magazord
+      POSTGRES_PASSWORD: teste_magazord
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+volumes:
+  db-data: {}
+
+networks:
+  app-network:
+    driver: bridge

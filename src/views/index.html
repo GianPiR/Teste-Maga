@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pessoas</title>
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar Pessoa</h1>
+
+        <form id="pessoa-form">
+            <input type="hidden" id="pessoa-id">
+            <input type="text" id="nome" placeholder="Nome" required>
+            <input type="text" id="cpf" placeholder="CPF" required>
+            <button type="submit">Adicionar</button>
+            <div id="error-message" style="display:none; color: red;"></div>
+        </form>
+
+        <h2>Lista de Pessoas</h2>
+        <ul id="pessoa-list"></ul>
+    </div>
+
+    <script src="../../public/js/script.js"></script>
+</body>
+</html>
