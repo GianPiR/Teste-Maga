@@ -157,7 +157,7 @@ function createEditButton(id) {
     const button = document.createElement("button");
     button.textContent = "Editar";
     button.onclick = () => {
-        window.location.href = `editpessoa.html?id=${id}`;
+        window.location.href = `../../src/views/editpessoa.html?id=${id}`;
     };
     return button;
 }
