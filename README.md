@@ -24,7 +24,7 @@ composer install
 vendor/bin/doctrine orm:schema-tool:create
 ```
 
-:four: Install dependencies:
+:four: Ligar o servidor:
 
 ```
 php -S localhost:8081 -t local-do-repositorio/public
